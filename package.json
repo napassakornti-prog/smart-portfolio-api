@@ -1,15 +1,5 @@
 {
   "name": "smart-portfolio-api",
   "version": "1.0.0",
-  "description": "Smart Investment Portfolio API",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "serverless-http": "^4.0.0"
-  }
+  "private": true
 }
