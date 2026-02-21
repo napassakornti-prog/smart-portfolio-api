@@ -1,12 +1,13 @@
 const express = require("express");
-const app = express();
+const serverless = require("serverless-http");
 
+const app = express();
 app.use(express.json());
 
 // ==========================
 // 1. Calculate Portfolio
 // ==========================
-app.post("/api/portfolio/calculate", (req, res) => {
+app.post("/portfolio/calculate", (req, res) => {
   const { invested, current, years } = req.body;
 
   const profit = current - invested;
@@ -25,7 +26,7 @@ app.post("/api/portfolio/calculate", (req, res) => {
 // ==========================
 // 2. DCA Simulation
 // ==========================
-app.post("/api/portfolio/dca", (req, res) => {
+app.post("/portfolio/dca", (req, res) => {
   const { monthlyInvestment, annualReturn, years } = req.body;
 
   const months = years * 12;
@@ -46,11 +47,11 @@ app.post("/api/portfolio/dca", (req, res) => {
 // ==========================
 // 3. Risk Analysis
 // ==========================
-app.get("/api/portfolio/risk", (req, res) => {
+app.get("/portfolio/risk", (req, res) => {
   res.json({
     riskLevel: "Moderate-High",
     comment: "Tech-heavy portfolio with growth exposure"
   });
 });
 
-module.exports = app;
+module.exports = serverless(app);
