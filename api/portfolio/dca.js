@@ -1,9 +1,20 @@
 export default function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+
+  let monthlyInvestment, annualReturn, years;
+
+  if (req.method === "POST") {
+    ({ monthlyInvestment, annualReturn, years } = req.body);
   }
 
-  const { monthlyInvestment, annualReturn, years } = req.body;
+  if (req.method === "GET") {
+    monthlyInvestment = Number(req.query.monthlyInvestment);
+    annualReturn = Number(req.query.annualReturn);
+    years = Number(req.query.years);
+  }
+
+  if (!monthlyInvestment || !annualReturn || !years) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
 
   const months = years * 12;
   const monthlyRate = annualReturn / 12 / 100;
